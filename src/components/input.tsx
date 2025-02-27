@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface InputProps extends ComponentProps<'div'> {
   error?: boolean
@@ -14,10 +15,13 @@ export function InputRoot({ error = false, ...props }: InputProps) {
 }
 
 interface InputIconProps extends ComponentProps<'span'> {}
-export function InputIcon(props: InputIconProps) {
+export function InputIcon({ className, ...props }: InputIconProps) {
   return (
     <span
-      className="text-gray-400 group-focus-within:text-gray-100 group-[&:not(:has(input:placeholder-shown))]:text-gray-100 group-data-[error=true]:text-danger"
+      className={twMerge(
+        'text-gray-400 group-focus-within:text-gray-100 group-[&:not(:has(input:placeholder-shown))]:text-gray-100 group-data-[error=true]:text-danger',
+        className
+      )}
       {...props}
     />
   )
