@@ -4,9 +4,10 @@ import { Status } from '@/components/status'
 import { BadgeCheck, Copy, Link, Medal, MousePointerClick } from 'lucide-react'
 import Image from 'next/image'
 import logo from '../../assets/Logo.svg'
-import model1 from '../../assets/Medal_1.svg'
+import { EnviarLink } from './invite-link'
 
 export default function ConvitePage() {
+  const inviteLink = 'devstage.com/codecraft-summit-2025/1281'
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center gap-16 px-4 py-8 lg:px-0 lg:py-0 md:flex-row">
       <div className="flex flex-col  w-full max-w-[550px] gap-10">
@@ -33,20 +34,7 @@ export default function ConvitePage() {
             </p>
           </div>
 
-          <InputRoot>
-            <InputIcon>
-              <Link className="size-5" />
-            </InputIcon>
-            <InputField
-              readOnly
-              type="text"
-              placeholder="Link do convite"
-              defaultValue="devstage.com/codecraft-summit-2025/1289"
-            />
-            <InputIcon className="bg-gray-500 p-1.5 rounded-md -mr-2">
-              <Copy className="size-5 cursor-pointer" />
-            </InputIcon>
-          </InputRoot>
+          <EnviarLink enviteLink={inviteLink} />
 
           <div className="grid md:grid-cols-3 gap-3 ">
             <Status
@@ -68,7 +56,7 @@ export default function ConvitePage() {
         </div>
       </div>
 
-      <div className="w-full max-w-[440px] space-y-5 border">
+      <div className="w-full max-w-[440px] space-y-5">
         <h2 className="text-gray-200 text-xl font-heading leading-none font-semibold">
           Ranking de inscrições
         </h2>
