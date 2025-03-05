@@ -1,8 +1,7 @@
-import { IconButton } from '@/components/icon-button'
-import { InputField, InputIcon, InputRoot } from '@/components/input'
 import { ArrowRight, Mail, Radio, User } from 'lucide-react'
 import Image from 'next/image'
 import logo from '../assets/Logo.svg'
+import { SubscriptionForm } from './(home)/subscription-form'
 export default function Home() {
   return (
     <div className="min-h-dvh flex flex-col md:justify-center px-4 gap-16 lg:px-0">
@@ -35,28 +34,7 @@ export default function Home() {
             Dias 15 a 17 de março | Das 18h às 21h
           </p>
         </div>
-        <form className="flex flex-col bg-gray-700 border border-gray-600 rounded-2xl p-8 space-y-6 w-full maxw-w-[440px] ">
-          <h2 className="font-heading text-xl font-medium text-gray-200">
-            Inscrição
-          </h2>
-          <div className="space-y-3">
-            <InputRoot>
-              <InputIcon>
-                <User />
-              </InputIcon>
-              <InputField type="text" placeholder="Nome completo" />
-            </InputRoot>
-            <InputRoot>
-              <InputIcon>
-                <Mail />
-              </InputIcon>
-              <InputField type="email" placeholder="Insira seu e-mail" />
-            </InputRoot>
-          </div>
-          <IconButton type="submit">
-            Confirmar <ArrowRight />
-          </IconButton>
-        </form>
+        <SubscriptionForm />
       </div>
     </div>
   )
