@@ -1,13 +1,26 @@
 'use client'
 import { IconButton } from '@/components/icon-button'
 import { InputField, InputIcon, InputRoot } from '@/components/input'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
+const subscriptioSchema = z.object({
+  name: z.string().min(2, 'Digite seu nome completo'),
+  email: z.string().email('Digite um email valido'),
+})
+type SubscriptioSchema = z.infer<typeof subscriptioSchema>
 export function SubscriptionForm() {
-  const { register, handleSubmit } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SubscriptioSchema>({
+    resolver: zodResolver(subscriptioSchema),
+  })
 
-  function onSubscribe(data: any) {
+  function onSubscribe(data: SubscriptioSchema) {
     // const values = Object.fromEntries(data.entries())
     console.log(data)
   }
@@ -20,26 +33,40 @@ export function SubscriptionForm() {
         Inscrição
       </h2>
       <div className="space-y-3">
-        <InputRoot>
-          <InputIcon>
-            <User />
-          </InputIcon>
-          <InputField
-            type="text"
-            placeholder="Nome completo"
-            {...register('name')}
-          />
-        </InputRoot>
-        <InputRoot>
-          <InputIcon>
-            <Mail />
-          </InputIcon>
-          <InputField
-            type="email"
-            placeholder="Insira seu e-mail"
-            {...register('email')}
-          />
-        </InputRoot>
+        <div className="space-y-2">
+          <InputRoot>
+            <InputIcon>
+              <User />
+            </InputIcon>
+            <InputField
+              type="text"
+              placeholder="Nome completo"
+              {...register('name')}
+            />
+          </InputRoot>
+          {errors.name && (
+            <p className="text-danger text-xs font-semibold px-3">
+              {errors.name.message}
+            </p>
+          )}
+        </div>
+        <div className="space-y-2">
+          <InputRoot>
+            <InputIcon>
+              <Mail />
+            </InputIcon>
+            <InputField
+              type="email"
+              placeholder="Insira seu e-mail"
+              {...register('email')}
+            />
+          </InputRoot>
+          {errors.email && (
+            <p className="text-danger text-xs font-semibold px-3">
+              {errors.email.message}
+            </p>
+          )}
+        </div>
       </div>
       <IconButton type="submit">
         Confirmar <ArrowRight />
