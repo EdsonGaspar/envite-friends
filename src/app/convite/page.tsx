@@ -7,7 +7,7 @@ import logo from '../../assets/Logo.svg'
 import { EnviarLink } from './invite-link'
 
 export default function ConvitePage() {
-  const inviteLink = 'devstage.com/codecraft-summit-2025/1281'
+  const inviteLink = 'devstage.com/codecraft-summit-2025/1292'
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center gap-16 px-4 py-8 lg:px-0 lg:py-0 md:flex-row">
       <div className="flex flex-col  w-full max-w-[550px] gap-10">

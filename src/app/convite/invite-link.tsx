@@ -1,10 +1,14 @@
 'use client'
+import { IconButton } from '@/components/icon-button'
 import { InputField, InputIcon, InputRoot } from '@/components/input'
 import { Copy, Link } from 'lucide-react'
 interface EnviarLinkProps {
   enviteLink: string
 }
-export function EnviarLink(props: EnviarLinkProps) {
+export function EnviarLink({ enviteLink }: EnviarLinkProps) {
+  async function handleCopy() {
+    await navigator.clipboard.writeText(enviteLink)
+  }
   return (
     <InputRoot>
       <InputIcon>
@@ -14,16 +18,14 @@ export function EnviarLink(props: EnviarLinkProps) {
         readOnly
         type="text"
         placeholder="Link do convite"
-        defaultValue={props.enviteLink}
+        defaultValue={enviteLink}
       />
-      <InputIcon
+      <IconButton
         className="bg-gray-500 p-1.5 rounded-md -mr-2"
-        onClick={() => {
-          console.log('Link copiado')
-        }}
+        onClick={handleCopy}
       >
         <Copy className="size-5 cursor-pointer" />
-      </InputIcon>
+      </IconButton>
     </InputRoot>
   )
 }
