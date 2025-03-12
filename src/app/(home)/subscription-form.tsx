@@ -1,8 +1,10 @@
 'use client'
 import { IconButton } from '@/components/icon-button'
 import { InputField, InputIcon, InputRoot } from '@/components/input'
+import { subscribeToEvent } from '@/http/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail, User } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -10,8 +12,12 @@ const subscriptioSchema = z.object({
   name: z.string().min(2, 'Digite seu nome completo'),
   email: z.string().email('Digite um email valido'),
 })
+
 type SubscriptioSchema = z.infer<typeof subscriptioSchema>
+
 export function SubscriptionForm() {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -20,9 +26,10 @@ export function SubscriptionForm() {
     resolver: zodResolver(subscriptioSchema),
   })
 
-  function onSubscribe(data: SubscriptioSchema) {
-    // const values = Object.fromEntries(data.entries())
-    console.log(data)
+  async function onSubscribe({ name, email }: SubscriptioSchema) {
+    const { subscriberId } = await subscribeToEvent({ name, email })
+
+    router.push(`/convite/${subscriberId}`)
   }
   return (
     <form
